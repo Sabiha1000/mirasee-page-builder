@@ -1078,7 +1078,7 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
         h('textarea', {
           value: rawCopy,
           onChange: e => setRawCopy(e.target.value),
-          placeholder: 'Paste the page copy here. Include the headline at the top, then subheadline, then body paragraphs, then any CTA. The agent will figure out the structure.\n\nExample:\nYou\'re a Little Early!\nThe AI for Business Growth training hasn\'t started just yet...\n\nI\'m glad you\'re here! If you\'re seeing this page, you\'re a bit early.\n\nThe training starts on Tuesday, April 7, at 11am Pacific / 2pm Eastern.\n\n...',
+          placeholder: '',
           rows: 12,
           className: 'w-full px-3 py-2 rounded-lg border border-stone-300 text-sm font-mono leading-relaxed focus:outline-none focus:ring-2 focus:ring-mirasee-blue/30 focus:border-mirasee-blue',
         }),
@@ -1740,9 +1740,7 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
             onChange: e => setChatInput(e.target.value),
             onKeyDown: handleKeyDown,
             onPaste: handlePaste,
-            placeholder: chatMessages.length === 0
-              ? 'Describe what you want to build...\n\nTry: "A testimonial section featuring this photo" (and attach an image)'
-              : 'Tell me what to change... (you can also attach more images)',
+            placeholder: '',
             disabled: chatLoading,
             rows: 3,
             className: 'flex-1 px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-mirasee-blue/30 focus:border-mirasee-blue resize-none disabled:opacity-50',
@@ -1770,17 +1768,7 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
   function ChatEmptyState() {
     return h('div', { className: 'h-full flex flex-col items-center justify-center text-center px-4 py-8' },
       h('div', { className: 'text-4xl mb-3 opacity-30' }, '💬'),
-      h('p', { className: 'text-sm font-semibold text-mirasee-ink mb-2' }, 'Start a conversation'),
-      h('p', { className: 'text-xs text-stone-500 max-w-xs leading-relaxed mb-4' },
-        'Describe the body section you want. The AI will generate Mirasee-styled HTML you can paste into Ontraport. Then chat to refine it.',
-      ),
-      h('div', { className: 'text-[11px] text-stone-400 space-y-1.5 max-w-xs text-left bg-stone-50 rounded-lg p-3 border border-stone-200' },
-        h('div', { className: 'font-semibold text-stone-600 mb-1' }, 'Try something like:'),
-        h('div', null, '• "A 3-column grid showing the benefits of our AI training"'),
-        h('div', null, '• "An FAQ section with 5 questions about pricing"'),
-        h('div', null, '• "A quote callout from Danny followed by a yellow CTA"'),
-        h('div', null, '• "What you\'ll learn list with 6 bullets and outline icons"'),
-      ),
+      h('p', { className: 'text-sm font-semibold text-mirasee-ink' }, 'Start a conversation'),
     );
   }
 
