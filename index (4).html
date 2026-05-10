@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mirasee Page Builder · Copy → Code Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Montserrat', 'sans-serif'],
+          sans: ['Montserrat', 'sans-serif'],
+          mono: ['JetBrains Mono', 'monospace'],
+        },
+        colors: {
+          mirasee: {
+            blue: '#013EA6',
+            teal: '#0089BD',
+            yellow: '#FFC72C',
+            ink: '#0A1530',
+            cream: '#FBF8F1',
+          },
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-family: 'Montserrat', sans-serif; background: #FBF8F1; color: #0A1530; }
+  .font-display { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: -0.01em; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ===== Mirasee preview styles (mirroring the real Ontraport CSS) ===== */
+  .preview-shell {
+    font-family: 'Montserrat', sans-serif;
+    background: white;
+    overflow: hidden;
+  }
+  .preview-shell * { font-family: 'Montserrat', sans-serif; }
+
+  .preview-shell .bg-hero {
+    background: radial-gradient(69.5% 64.74% at 3.29% 7.39%, #0089bd 0, #013ea6 100%), #fff;
+    margin: 0;
+    min-height: 380px;
+    padding: 0 0 13rem 0;
+    position: relative;
+    width: 100%;
+    color: white;
+    text-align: center;
+  }
+  /* The signature wavy white curve at the bottom of the hero */
+  .preview-shell .bg-hero::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='66' fill='none' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' d='M1400 66H0V0c593 132 814-59 1400 35v31Z'/%3E%3C/svg%3E");
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    bottom: -1px;
+    content: "";
+    display: block;
+    height: 5vw;
+    min-height: 30px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 2;
+  }
+
+  /* The white logo "tab" at the top-left with curved bottom corners */
+  .preview-shell .logo-tab {
+    width: 200px;
+    height: 70px;
+    margin-left: 1rem;
+    margin-top: -2px;
+    background-image: url('data:image/svg+xml;utf8,<svg width="264" height="88" viewBox="0 0 264 88" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M33.5 40.5C32.1278 25.8757 22.3889 11.0857 7.39674 5.33114C7.36722 5.31981 7.35246 5.31415 7.30548 5.29718C6.82835 5.1249 6.2145 5.01114 5.70731 5.001C5.65736 5 5.62001 5 5.54532 5H2.5C1.11929 5 0 3.88071 0 2.5C0 1.11929 1.11929 0 2.5 0H261.5C262.881 0 264 1.11929 264 2.5C264 3.88071 262.881 5 261.5 5H260.161C259.724 5 259.287 5.07343 258.878 5.22697C243.73 10.9055 233.881 25.7866 232.5 40.5V77.5C232.5 82.214 232.5 84.5711 231.036 86.0355C229.571 87.5 227.214 87.5 222.5 87.5H43.5C38.786 87.5 36.4289 87.5 34.9645 86.0355C33.5 84.5711 33.5 82.214 33.5 77.5V40.5Z" fill="white"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0.85rem;
+    position: relative;
+    z-index: 3;
+  }
+  .preview-shell .logo-tab span {
+    font-family: 'Montserrat', sans-serif;
+    color: #013EA6;
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    margin-left: -0.5rem;
+  }
+
+  .preview-shell .hero-headline {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 2.4rem;
+    line-height: 1.15;
+    margin: 1.5rem auto 0.75rem;
+    padding: 0 1.5rem;
+    max-width: 720px;
+    color: white;
+  }
+  .preview-shell .hero-sub {
+    color: #9DD9F3;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0 1.5rem;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
+  /* The body content panel that OVERLAPS the hero curve */
+  .preview-shell .text-content {
+    margin-top: -10rem;
+    z-index: 11;
+    position: relative;
+    padding: 1.5rem 2rem 2.5rem;
+    background: white;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    border-radius: 4px;
+  }
+  .preview-shell .text-content p {
+    margin: 0 0 1rem;
+    line-height: 1.65;
+    color: #0A1530;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+  }
+  .preview-shell .text-content strong { font-weight: 700; }
+
+  .preview-shell .timer-block {
+    background: #1E40AF;
+    color: white;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+  }
+  .preview-shell .timer-cell { text-align: center; }
+  .preview-shell .timer-cell .num { font-size: 1.75rem; font-weight: 700; line-height: 1; }
+  .preview-shell .timer-cell .lbl { font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.85; font-weight: 600; }
+
+  .preview-shell .cta-btn {
+    background: #FFC72C;
+    color: #0A1530;
+    font-weight: 700;
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    display: inline-block;
+    margin: 1rem 0;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .preview-shell .signature-row {
+    margin: 2rem 0 1rem;
+    text-align: left;
+  }
+  .preview-shell .signature-row img {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Render the image as crisply as possible despite the compressed source */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    /* Tiny contrast/saturation bump compensates for thumbnail compression */
+    filter: contrast(1.06) saturate(1.05);
+    /* Hardware acceleration helps the browser use a higher-quality scaler */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  .preview-shell .signature-row .ph-fallback {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f3f4f6;
+    border-radius: 4px;
+    color: #6b7280;
+    font-size: 0.85rem;
+  }
+
+  .preview-shell .video-block {
+    background: #f3f4f6;
+    aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center;
+    color: #6b7280; font-size: 0.85rem;
+    margin: 1.25rem 0;
+    border-radius: 4px;
+  }
+  .preview-shell .form-block {
+    border: 2px dashed #FFC72C;
+    background: #FFFBEB;
+    padding: 1.5rem; text-align: center;
+    color: #92400E; font-size: 0.85rem; font-weight: 600;
+    margin: 1.25rem 0;
+    border-radius: 4px;
+  }
+  .preview-shell .footer-bar {
+    border-top: 1px solid #e5e7eb;
+    padding: 1.5rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem; color: #6b7280;
+    background: white;
+    margin-top: 1rem;
+  }
+  .preview-shell .footer-bar .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    color: #013EA6;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #FBF8F1; }
+  ::-webkit-scrollbar-thumb { background: #d6d3c5; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #b8b3a0; }
+
+  /* Loader */
+  .dot-pulse {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 1.4s infinite ease-in-out both;
+  }
+  .dot-pulse:nth-child(1) { animation-delay: -0.32s; }
+  .dot-pulse:nth-child(2) { animation-delay: -0.16s; }
+  @keyframes pulse {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Code block */
+  pre.code-block {
+    background: #0A1530;
+    color: #E5E7EB;
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  textarea, input, select {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .grain {
+    background-image: radial-gradient(circle at 20% 30%, rgba(1, 62, 166, 0.04) 0px, transparent 2px),
+                      radial-gradient(circle at 70% 80%, rgba(255, 199, 44, 0.05) 0px, transparent 2px);
+    background-size: 24px 24px, 32px 32px;
+  }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+</style>
+</head>
+<body class="grain min-h-screen">
+
+<div id="root"></div>
+
+<script type="module">
+  import React, { useState, useEffect, useRef } from 'https://esm.sh/react@18';
+  import ReactDOM from 'https://esm.sh/react-dom@18/client';
+
+  const h = React.createElement;
+
+  // ----- Hardcoded Mirasee assets -----
+  // Combined headshot + signature image (provided by the Mirasee team)
+  const DANNY_SIGNATURE_COMBINED = 'https://i.ontraport.com/thumbs/265108.820fea3a03c264f37561703e543fb148.PNG';
+
+  // ----- Mirasee CSS that gets pasted into Ontraport's custom CSS -----
+  const MIRASEE_CSS = `<style>
+.bg-hero {
+  background: radial-gradient(69.5% 64.74% at 3.29% 7.39%, #0089bd 0, #013ea6 100%), #fff;
+  flex: none;
+  flex-grow: 0;
+  margin: 0;
+  min-height: 450px;
+  padding-bottom: 13rem !important;
+  order: 1;
+  position: relative;
+  width: 100%
+}
+.bg-hero:before {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='66' fill='none'%3E%3Cpath fill='%23FFFFFF' d='M1400 66H0V0c593 132 814-59 1400 35v31Z'/%3E%3C/svg%3E");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 4.7vw;
+  position: absolute;
+  width: 100%
+}
+.bg-hero .js-opt-bg-img { opacity:0 !important; }
+.header {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(69.5% 64.74% at 3.29% 7.39%, #0089BD 0%, #013EA6 100%), #ffffff;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0;
+}
+.logo-tab {
+  width: 265px;
+  height: 90px;
+  margin-top: -5px;
+  margin-left: -3rem;
+  background: url('data:image/svg+xml,<svg width="264" height="88" viewBox="0 0 264 88" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M33.5 40.5C32.1278 25.8757 22.3889 11.0857 7.39674 5.33114L7.39671 5.33113C7.36722 5.31981 7.35246 5.31415 7.30548 5.29718C6.82835 5.1249 6.2145 5.01114 5.70731 5.001C5.65736 5 5.62001 5 5.54532 5H2.5C1.11929 5 0 3.88071 0 2.5C0 1.11929 1.11929 0 2.5 0H261.5C262.881 0 264 1.11929 264 2.5C264 3.88071 262.881 5 261.5 5H260.161C259.724 5 259.287 5.07343 258.878 5.22697C243.73 10.9055 233.881 25.7866 232.5 40.5V77.5C232.5 82.214 232.5 84.5711 231.036 86.0355C229.571 87.5 227.214 87.5 222.5 87.5H43.5C38.786 87.5 36.4289 87.5 34.9645 86.0355C33.5 84.5711 33.5 82.214 33.5 77.5V40.5Z" fill="white"/></svg>') no-repeat center top;
+  text-align: center;
+}
+.logo-tab img { margin-top: 1rem; max-width: 160px !important; }
+.header .primary-color-background { background-color: transparent !important; }
+.text-content { margin-top: -16rem !important; z-index:11 !important; }
+.ms-hidden-timer { display:none !important; }
+</style>`;
+
+  // ----- Template configurations -----
+  const TEMPLATES = {
+    'text-landing': {
+      name: 'Text Landing',
+      description: 'Hero with headline + subheadline, body copy, signature footer.',
+      icon: '📄',
+      hasVideo: false,
+      hasForm: false,
+    },
+    'video-landing': {
+      name: 'Video Landing',
+      description: 'Hero + Wistia video + body copy + CTA + signature footer.',
+      icon: '🎬',
+      hasVideo: true,
+      hasForm: false,
+    },
+    'text-form-landing': {
+      name: 'Text Landing with Form',
+      description: 'Text landing with an Ontraport form embedded at your chosen position.',
+      icon: '📝',
+      hasVideo: false,
+      hasForm: true,
+    },
+  };
+
+  // ----- The system prompt sent to Claude API -----
+  function buildSystemPrompt(templateKey, options) {
+    const t = TEMPLATES[templateKey];
+    return `You are an expert page-copy structurer for Mirasee — an online education company that publishes landing pages built in Ontraport Pages.
+
+You will receive raw marketing copy from a page designer. Your job is to intelligently structure that copy into a clean JSON object that maps onto a Mirasee "${t.name}" template.
+
+THE TEMPLATE STRUCTURE has these slots:
+1. hero_headline — the main H1 shown over the blue gradient hero. Concise, punchy, 3-10 words. Sentence case with trailing punctuation if present in original. Plain text only — no HTML.
+2. hero_subheadline — a single supporting line shown under the headline in the hero. 5-15 words. Plain text only.
+3. body_html — the main body content shown below the hero on white background. Output as clean HTML with <p> tags for paragraphs, <strong> for bold emphasis on dates/key phrases, <em> for italic emphasis. Use <strong> sparingly — only where the source clearly emphasizes (bold dates, key takeaways, names of products). Do NOT add classes, ids, or styles. Do NOT wrap in <div>. Do NOT include <h1>, <h2>, etc — keep body as paragraphs. If the original ends with a sign-off line like "See you soon," keep it as its own <p>.
+4. cta_text — the text on the primary action button. 2-6 words. Title Case. If no CTA is present in the source copy, return null.
+5. cta_url — if a URL is mentioned in the copy, extract it. Otherwise return null.
+${t.hasVideo ? '6. video_intro_text — optional 1-2 sentence intro that goes ABOVE the video (often a small expiry notice in yellow, like "Expires Wednesday at Midnight Pacific..."). Return null if not present.\n' : ''}
+RULES:
+- Do NOT invent content. Only restructure what the user provides. If the user did not give a subheadline, return an empty string for hero_subheadline.
+- Do NOT change wording. Preserve the writer's voice exactly. You are formatting, not rewriting.
+- Use proper smart quotes ("" '' ') and em-dashes (—) where appropriate.
+- For emphasis: bold dates and times, bold product/event names on first mention, italicize words the writer clearly meant to italicize (often surrounded by * or _ in the input, or contextually emphasized).
+- Output ONLY a single JSON object. No prose, no markdown fences, no explanation.
+
+OUTPUT FORMAT (JSON, no other text):
+{
+  "hero_headline": "...",
+  "hero_subheadline": "...",
+  "body_html": "<p>...</p><p>...</p>",
+  "cta_text": "..." or null,
+  "cta_url": "..." or null${t.hasVideo ? ',\n  "video_intro_text": "..." or null' : ''}
+}`;
+  }
+
+  // ----- Call the Anthropic API directly from the browser -----
+  async function callClaude(apiKey, systemPrompt, userCopy) {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 2000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userCopy }],
+      }),
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`API error ${res.status}: ${err}`);
+    }
+    const data = await res.json();
+    const text = data.content.map(b => b.type === 'text' ? b.text : '').join('').trim();
+    // Strip code fences if Claude added them
+    const cleaned = text.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/```\s*$/, '').trim();
+    return JSON.parse(cleaned);
+  }
+
+  // ----- Generators for the various output blocks -----
+  function generateTimerBlock() {
+    return `<!-- COUNTDOWN TIMER BLOCK — drop into an Ontraport HTML element -->
+<!-- IMPORTANT: Ontraport has a built-in countdown widget. Use that for the live counter. -->
+<!-- This snippet is the visual frame; replace the {{0}} values with Ontraport's merge tags. -->
+<div style="background:#1E40AF;color:white;padding:1.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center;font-family:'Montserrat',sans-serif;">
+  <div><div style="font-size:2.25rem;font-weight:700;line-height:1;">[[days]]</div><div style="font-size:0.75rem;letter-spacing:0.1em;opacity:0.85;margin-top:0.25rem;">DAYS</div></div>
+  <div><div style="font-size:2.25rem;font-weight:700;line-height:1;">[[hours]]</div><div style="font-size:0.75rem;letter-spacing:0.1em;opacity:0.85;margin-top:0.25rem;">HOURS</div></div>
+  <div><div style="font-size:2.25rem;font-weight:700;line-height:1;">[[minutes]]</div><div style="font-size:0.75rem;letter-spacing:0.1em;opacity:0.85;margin-top:0.25rem;">MINUTES</div></div>
+  <div><div style="font-size:2.25rem;font-weight:700;line-height:1;">[[seconds]]</div><div style="font-size:0.75rem;letter-spacing:0.1em;opacity:0.85;margin-top:0.25rem;">SECONDS</div></div>
+</div>`;
+  }
+
+  function generateWistiaBlock(videoId) {
+    if (!videoId) videoId = 'YOUR_WISTIA_ID';
+    return `<!-- WISTIA VIDEO EMBED — drop into an Ontraport HTML element -->
+<script src="https://fast.wistia.com/embed/medias/${videoId}.jsonp" async></` + `script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async></` + `script>
+<div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+  <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+    <div class="wistia_embed wistia_async_${videoId} videoFoam=true" style="height:100%;position:relative;width:100%;">&nbsp;</div>
+  </div>
+</div>`;
+  }
+
+  function generateOntraportFormBlock(formId) {
+    if (!formId) formId = 'YOUR_FORM_ID';
+    return `<!-- ONTRAPORT FORM EMBED — drop into an Ontraport HTML element OR use the native form widget -->
+<!-- Replace ${formId} with the actual form ID from Ontraport > Forms -->
+<div align="center">
+  <script type="text/javascript" src="https://forms.ontraport.com/v2.4/include/formEditor/genembed.php?id=${formId}" data-cfasync="false"></` + `script>
+</div>
+<!-- TIP: In Ontraport Pages, you can also drag the native "Form" element onto the page and select form ID ${formId} from the dropdown — that's usually cleaner than this script embed. -->`;
+  }
+
+  function generateSignaturePlaceholder() {
+    return `<!-- SIGNATURE / FOOTER ROW — drop into an Ontraport HTML element -->
+<div style="margin:2rem 0;font-family:'Montserrat',sans-serif;">
+  <img src="${DANNY_SIGNATURE_COMBINED}" alt="Danny Iny" style="max-width:320px;width:100%;height:auto;display:block;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;filter:contrast(1.06) saturate(1.05);" />
+</div>`;
+  }
+
+  // ----- Build a full standalone HTML preview -----
+  function buildStandaloneHTML(templateKey, structured, options) {
+    const t = TEMPLATES[templateKey];
+    const heroSub = structured.hero_subheadline ? `<p class="hero-sub">${escapeHtml(structured.hero_subheadline)}</p>` : '';
+    const videoIntro = (t.hasVideo && structured.video_intro_text)
+      ? `<p style="color:#FFC72C;font-weight:600;text-align:center;margin:0 2rem 0.5rem;">${escapeHtml(structured.video_intro_text)}</p>`
+      : '';
+    const videoBlock = t.hasVideo
+      ? `<div class="video-block">${options.wistiaId ? `<!-- Wistia ID: ${options.wistiaId} -->` : ''}[ Wistia video player — ID: ${options.wistiaId || 'YOUR_WISTIA_ID'} ]</div>`
+      : '';
+    const timerBlock = options.includeTimer
+      ? `<div class="timer-block">
+          <div class="timer-cell"><div class="num">0</div><div class="lbl">DAYS</div></div>
+          <div class="timer-cell"><div class="num">0</div><div class="lbl">HOURS</div></div>
+          <div class="timer-cell"><div class="num">0</div><div class="lbl">MINUTES</div></div>
+          <div class="timer-cell"><div class="num">0</div><div class="lbl">SECONDS</div></div>
+        </div>`
+      : '';
+    const ctaBlock = structured.cta_text
+      ? `<div style="text-align:center;margin:2rem 0;"><a class="cta-btn" href="${structured.cta_url || '#'}">${escapeHtml(structured.cta_text)} →</a></div>`
+      : '';
+    const formBlock = (t.hasForm)
+      ? `<div class="form-block">[ Ontraport Form — ID: ${options.formId || 'YOUR_FORM_ID'} ]</div>`
+      : '';
+    const signature = `<div class="signature-row">
+        <img src="${DANNY_SIGNATURE_COMBINED}" alt="Danny Iny" />
+      </div>`;
+
+    // Decide where the form goes (form templates only)
+    let bodyContent = structured.body_html || '';
+    if (t.hasForm) {
+      const pos = options.formPosition || 'after-body';
+      if (pos === 'before-body') bodyContent = formBlock + bodyContent;
+      else if (pos === 'after-body') bodyContent = bodyContent + formBlock;
+      else if (pos === 'middle') {
+        const paras = bodyContent.split('</p>').filter(Boolean);
+        const mid = Math.floor(paras.length / 2);
+        bodyContent = paras.slice(0, mid).join('</p>') + '</p>' + formBlock + paras.slice(mid).join('</p>') + (paras.length > 0 ? '' : '');
+      }
+    }
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${escapeHtml(structured.hero_headline || 'Mirasee Page')}</title>
+${MIRASEE_CSS.replace(/<\/?style>/g, '')
+  .replace(/^/, '<style>')
+  .concat(`
+body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; background: white; }
+* { font-family: 'Montserrat', sans-serif; }
+.hero-headline { font-weight: 800; font-size: 3rem; line-height: 1.15; color: white; text-align: center; margin: 4rem auto 1rem; padding: 0 2rem; max-width: 900px; }
+.hero-sub { color: #9DD9F3; font-weight: 600; font-size: 1.25rem; text-align: center; padding: 0 2rem; margin: 0 auto 2rem; max-width: 800px; }
+.text-content { max-width: 760px; margin: -16rem auto 3rem; background: white; padding: 2rem 2.5rem 3rem; position: relative; z-index: 11; line-height: 1.7; }
+.text-content p { margin: 0 0 1.25rem; font-size: 1.05rem; }
+.text-content strong { font-weight: 700; }
+.timer-block { background: #1E40AF; color: white; padding: 1.5rem; display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; text-align: center; margin: 2rem 0; }
+.timer-cell .num { font-size: 2.25rem; font-weight: 700; line-height: 1; }
+.timer-cell .lbl { font-size: 0.75rem; letter-spacing: 0.1em; opacity: 0.85; margin-top: 0.25rem; font-weight: 600; }
+.cta-btn { background: #FFC72C; color: #0A1530; font-weight: 700; padding: 1rem 2.5rem; border-radius: 999px; display: inline-block; text-decoration: none; font-size: 1.05rem; }
+.signature-row { margin: 2rem 0; }
+.signature-row img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  filter: contrast(1.06) saturate(1.05);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+.video-block { background: #f3f4f6; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: #6b7280; margin: 1.5rem 0; }
+.form-block { border: 2px dashed #FFC72C; background: #FFFBEB; padding: 2rem; text-align: center; color: #92400E; font-weight: 600; margin: 2rem 0; }
+.footer-bar { border-top: 1px solid #e5e7eb; padding: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #6b7280; max-width: 1100px; margin: 0 auto; }
+.footer-bar .footer-logo { color: #013EA6; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; }
+</style>`)}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-hero">
+    <div class="logo-tab"></div>
+    <h1 class="hero-headline">${escapeHtml(structured.hero_headline || '')}</h1>
+    ${heroSub}
+  </div>
+  <div class="text-content">
+    ${videoIntro}
+    ${t.hasVideo ? videoBlock : ''}
+    ${timerBlock}
+    ${bodyContent}
+    ${ctaBlock}
+    ${signature}
+  </div>
+  <div class="footer-bar">
+    <div class="footer-logo">mirasee</div>
+    <div>Copyright © 2026 Mirasee. All Rights Reserved.</div>
+  </div>
+</body>
+</html>`;
+  }
+
+  function escapeHtml(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // ============================================================
+  // UI COMPONENTS
+  // ============================================================
+
+  function App() {
+    const [apiKey, setApiKey] = useState(() => localStorage.getItem('claude_api_key') || '');
+    const [showApiKey, setShowApiKey] = useState(false);
+    const [templateKey, setTemplateKey] = useState('text-landing');
+    const [rawCopy, setRawCopy] = useState('');
+    const [includeTimer, setIncludeTimer] = useState(false);
+    const [wistiaId, setWistiaId] = useState('');
+    const [formId, setFormId] = useState('');
+    const [formPosition, setFormPosition] = useState('after-body');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [result, setResult] = useState(null);
+    const [outputMode, setOutputMode] = useState('snippets'); // 'snippets' or 'standalone'
+    const [activeTab, setActiveTab] = useState('preview');
+
+    // Persist API key locally so it isn't re-entered each time
+    useEffect(() => {
+      if (apiKey) localStorage.setItem('claude_api_key', apiKey);
+    }, [apiKey]);
+
+    const template = TEMPLATES[templateKey];
+
+    async function handleGenerate() {
+      setError('');
+      if (!apiKey.trim()) {
+        setError('Please enter your Anthropic API key first.');
+        return;
+      }
+      if (!rawCopy.trim()) {
+        setError('Please paste some copy first.');
+        return;
+      }
+      if (template.hasForm && !formId.trim()) {
+        setError('This template requires an Ontraport Form ID. (You can use a placeholder like 12345 if you don\'t have it yet.)');
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const sys = buildSystemPrompt(templateKey, { includeTimer, wistiaId, formId, formPosition });
+        const structured = await callClaude(apiKey, sys, rawCopy);
+        setResult(structured);
+        setActiveTab('preview');
+      } catch (e) {
+        setError(e.message || String(e));
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    return h('div', { className: 'min-h-screen' },
+      h(Header, null),
+      h('main', { className: 'max-w-7xl mx-auto px-6 py-8' },
+        h(ApiKeyBar, { apiKey, setApiKey, showApiKey, setShowApiKey }),
+        h('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6' },
+          // LEFT: Input panel
+          h(InputPanel, {
+            templateKey, setTemplateKey,
+            rawCopy, setRawCopy,
+            includeTimer, setIncludeTimer,
+            wistiaId, setWistiaId,
+            formId, setFormId,
+            formPosition, setFormPosition,
+            template,
+            onGenerate: handleGenerate,
+            loading, error,
+          }),
+          // RIGHT: Output panel
+          h(OutputPanel, {
+            result, loading, template, templateKey,
+            options: { includeTimer, wistiaId, formId, formPosition },
+            outputMode, setOutputMode,
+            activeTab, setActiveTab,
+          }),
+        ),
+        h(Footer, null),
+      ),
+    );
+  }
+
+  function Header() {
+    return h('header', { className: 'border-b border-stone-200 bg-mirasee-cream' },
+      h('div', { className: 'max-w-7xl mx-auto px-6 py-5 flex items-center justify-between' },
+        h('div', { className: 'flex items-center gap-3' },
+          h('div', {
+            className: 'w-10 h-10 rounded-lg flex items-center justify-center',
+            style: { background: 'radial-gradient(69.5% 64.74% at 3.29% 7.39%, #0089BD 0%, #013EA6 100%)' },
+          },
+            h('span', { className: 'text-white font-display font-extrabold text-lg' }, 'M'),
+          ),
+          h('div', null,
+            h('div', { className: 'font-display text-xl font-extrabold text-mirasee-ink leading-tight tracking-tight' }, 'Mirasee Page Builder'),
+            h('div', { className: 'text-xs text-stone-500 -mt-0.5' }, 'Copy → Code agent for Ontraport landing pages'),
+          ),
+        ),
+        h('a', {
+          href: 'https://github.com',
+          target: '_blank',
+          className: 'text-xs text-stone-500 hover:text-mirasee-blue font-mono',
+        }, 'view on github →'),
+      ),
+    );
+  }
+
+  function ApiKeyBar({ apiKey, setApiKey, showApiKey, setShowApiKey }) {
+    const hasKey = apiKey.trim().length > 0;
+    return h('div', {
+      className: `rounded-lg border p-4 flex items-center gap-3 ${hasKey ? 'border-emerald-200 bg-emerald-50' : 'border-amber-300 bg-amber-50'}`,
+    },
+      h('div', {
+        className: `w-2 h-2 rounded-full ${hasKey ? 'bg-emerald-500' : 'bg-amber-500'}`,
+      }),
+      h('div', { className: 'flex-1' },
+        h('div', { className: 'text-sm font-semibold text-mirasee-ink' },
+          hasKey ? 'API key saved (stored in your browser only)' : 'Anthropic API key required',
+        ),
+        h('div', { className: 'text-xs text-stone-600 mt-0.5' },
+          'Get one at console.anthropic.com → API Keys. The key never leaves your browser.',
+        ),
+      ),
+      h('input', {
+        type: showApiKey ? 'text' : 'password',
+        value: apiKey,
+        onChange: e => setApiKey(e.target.value),
+        placeholder: 'sk-ant-api03-...',
+        className: 'flex-1 max-w-sm px-3 py-1.5 rounded border border-stone-300 text-sm font-mono bg-white',
+      }),
+      h('button', {
+        onClick: () => setShowApiKey(!showApiKey),
+        className: 'text-xs text-stone-500 hover:text-mirasee-blue',
+      }, showApiKey ? 'hide' : 'show'),
+    );
+  }
+
+  function InputPanel({
+    templateKey, setTemplateKey,
+    rawCopy, setRawCopy,
+    includeTimer, setIncludeTimer,
+    wistiaId, setWistiaId,
+    formId, setFormId,
+    formPosition, setFormPosition,
+    template,
+    onGenerate, loading, error,
+  }) {
+    return h('div', { className: 'bg-white rounded-xl border border-stone-200 p-6 shadow-sm' },
+      h('div', { className: 'flex items-center justify-between mb-4' },
+        h('h2', { className: 'font-display text-2xl font-semibold text-mirasee-ink' }, '1. Inputs'),
+        h('span', { className: 'font-mono text-[10px] uppercase tracking-wider text-stone-400' }, 'left side'),
+      ),
+
+      // Template picker
+      h('div', { className: 'mb-5' },
+        h('label', { className: 'block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2' }, 'Template'),
+        h('div', { className: 'grid grid-cols-3 gap-2' },
+          Object.entries(TEMPLATES).map(([key, t]) =>
+            h('button', {
+              key,
+              onClick: () => setTemplateKey(key),
+              className: `p-3 rounded-lg border-2 text-left transition ${templateKey === key ? 'border-mirasee-blue bg-blue-50' : 'border-stone-200 hover:border-stone-300'}`,
+            },
+              h('div', { className: 'text-xl mb-1' }, t.icon),
+              h('div', { className: 'text-xs font-semibold text-mirasee-ink leading-tight' }, t.name),
+            ),
+          ),
+        ),
+        h('p', { className: 'text-xs text-stone-500 mt-2' }, template.description),
+      ),
+
+      // Raw copy textarea
+      h('div', { className: 'mb-5' },
+        h('label', { className: 'block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2' },
+          'Paste your copy',
+        ),
+        h('textarea', {
+          value: rawCopy,
+          onChange: e => setRawCopy(e.target.value),
+          placeholder: 'Paste the page copy here. Include the headline at the top, then subheadline, then body paragraphs, then any CTA. The agent will figure out the structure.\n\nExample:\nYou\'re a Little Early!\nThe AI for Business Growth training hasn\'t started just yet...\n\nI\'m glad you\'re here! If you\'re seeing this page, you\'re a bit early.\n\nThe training starts on Tuesday, April 7, at 11am Pacific / 2pm Eastern.\n\n...',
+          rows: 12,
+          className: 'w-full px-3 py-2 rounded-lg border border-stone-300 text-sm font-mono leading-relaxed focus:outline-none focus:ring-2 focus:ring-mirasee-blue/30 focus:border-mirasee-blue',
+        }),
+        h('p', { className: 'text-xs text-stone-500 mt-1' },
+          `${rawCopy.length} characters · ~${Math.ceil(rawCopy.split(/\s+/).filter(Boolean).length)} words`,
+        ),
+      ),
+
+      // Conditional options
+      template.hasVideo && h('div', { className: 'mb-4' },
+        h('label', { className: 'block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2' },
+          'Wistia video ID',
+        ),
+        h('input', {
+          type: 'text',
+          value: wistiaId,
+          onChange: e => setWistiaId(e.target.value.trim()),
+          placeholder: 'e.g. abc12def34 (the ID, not the full URL)',
+          className: 'w-full px-3 py-2 rounded-lg border border-stone-300 text-sm font-mono',
+        }),
+        h('p', { className: 'text-xs text-stone-500 mt-1' },
+          'Find this in Wistia: it\'s the alphanumeric ID in the video URL (wistia.com/medias/',
+          h('span', { className: 'font-bold' }, 'abc12def34'), ').',
+        ),
+      ),
+
+      template.hasForm && h(React.Fragment, null,
+        h('div', { className: 'mb-4' },
+          h('label', { className: 'block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2' },
+            'Ontraport Form ID',
+          ),
+          h('input', {
+            type: 'text',
+            value: formId,
+            onChange: e => setFormId(e.target.value.trim()),
+            placeholder: 'e.g. 12345',
+            className: 'w-full px-3 py-2 rounded-lg border border-stone-300 text-sm font-mono',
+          }),
+          h('p', { className: 'text-xs text-stone-500 mt-1' },
+            'Get this from Ontraport → Forms → your form → the ID number.',
+          ),
+        ),
+        h('div', { className: 'mb-4' },
+          h('label', { className: 'block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2' },
+            'Where should the form go?',
+          ),
+          h('div', { className: 'grid grid-cols-3 gap-2' },
+            [
+              { v: 'before-body', l: 'Before body', d: 'Right under hero' },
+              { v: 'middle', l: 'Middle', d: 'Between paragraphs' },
+              { v: 'after-body', l: 'After body', d: 'Below copy, before footer' },
+            ].map(o =>
+              h('button', {
+                key: o.v,
+                onClick: () => setFormPosition(o.v),
+                className: `p-2.5 rounded border-2 text-left transition ${formPosition === o.v ? 'border-mirasee-yellow bg-amber-50' : 'border-stone-200 hover:border-stone-300'}`,
+              },
+                h('div', { className: 'text-xs font-semibold text-mirasee-ink' }, o.l),
+                h('div', { className: 'text-[10px] text-stone-500 mt-0.5' }, o.d),
+              ),
+            ),
+          ),
+        ),
+      ),
+
+      h('div', { className: 'mb-5' },
+        h('label', { className: 'flex items-center gap-2 cursor-pointer' },
+          h('input', {
+            type: 'checkbox',
+            checked: includeTimer,
+            onChange: e => setIncludeTimer(e.target.checked),
+            className: 'w-4 h-4 rounded text-mirasee-blue',
+          }),
+          h('span', { className: 'text-sm text-mirasee-ink' }, 'Include countdown timer block'),
+          h('span', { className: 'text-xs text-stone-500' }, '(DAYS / HOURS / MINUTES / SECONDS)'),
+        ),
+      ),
+
+      // Generate button
+      h('button', {
+        onClick: onGenerate,
+        disabled: loading,
+        className: 'w-full py-3 rounded-lg font-semibold text-white transition disabled:opacity-50 disabled:cursor-not-allowed',
+        style: {
+          background: loading
+            ? '#94a3b8'
+            : 'radial-gradient(69.5% 64.74% at 3.29% 7.39%, #0089BD 0%, #013EA6 100%)',
+        },
+      },
+        loading
+          ? h('span', { className: 'inline-flex items-center gap-2' },
+              h('span', { className: 'dot-pulse' }), h('span', { className: 'dot-pulse' }), h('span', { className: 'dot-pulse' }),
+              h('span', { className: 'ml-2' }, 'Structuring copy with Claude...'),
+            )
+          : '⚡ Generate Code',
+      ),
+
+      error && h('div', { className: 'mt-3 p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-800' }, error),
+    );
+  }
+
+  function OutputPanel({ result, loading, template, templateKey, options, outputMode, setOutputMode, activeTab, setActiveTab }) {
+    if (!result) {
+      return h('div', { className: 'bg-white rounded-xl border border-stone-200 p-6 shadow-sm flex flex-col items-center justify-center text-center min-h-[500px]' },
+        h('div', { className: 'text-5xl mb-3 opacity-20' }, '✨'),
+        h('h2', { className: 'font-display text-2xl font-semibold text-mirasee-ink mb-2' }, 'Output will appear here'),
+        h('p', { className: 'text-sm text-stone-500 max-w-sm' },
+          'Pick a template, paste your copy, and click Generate. You\'ll get a live preview, code snippets to paste into Ontraport, plus a build checklist.',
+        ),
+      );
+    }
+
+    return h('div', { className: 'bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden' },
+      // Header with tabs
+      h('div', { className: 'border-b border-stone-200 px-6 pt-5' },
+        h('div', { className: 'flex items-center justify-between mb-3' },
+          h('h2', { className: 'font-display text-2xl font-semibold text-mirasee-ink' }, '2. Output'),
+          h('span', { className: 'font-mono text-[10px] uppercase tracking-wider text-stone-400' }, 'right side'),
+        ),
+        h('div', { className: 'flex gap-1 -mb-px' },
+          ['preview', 'snippets', 'standalone', 'checklist'].map(tab =>
+            h('button', {
+              key: tab,
+              onClick: () => setActiveTab(tab),
+              className: `px-4 py-2 text-sm font-medium border-b-2 transition ${activeTab === tab ? 'border-mirasee-blue text-mirasee-blue' : 'border-transparent text-stone-500 hover:text-stone-700'}`,
+            },
+              tab === 'preview' ? '👁  Preview' :
+              tab === 'snippets' ? '✂️  Snippets' :
+              tab === 'standalone' ? '📄  Standalone HTML' :
+              '✅  Build steps',
+            ),
+          ),
+        ),
+      ),
+
+      // Tab content
+      h('div', { className: 'p-6' },
+        activeTab === 'preview' && h(PreviewTab, { result, template, templateKey, options }),
+        activeTab === 'snippets' && h(SnippetsTab, { result, template, options }),
+        activeTab === 'standalone' && h(StandaloneTab, { result, templateKey, options }),
+        activeTab === 'checklist' && h(ChecklistTab, { result, template, options }),
+      ),
+    );
+  }
+
+  function PreviewTab({ result, template, templateKey, options }) {
+    return h('div', null,
+      h('p', { className: 'text-xs text-stone-500 mb-3' },
+        'A simulated preview of how the page will look. The hero gradient + curve come from your Mirasee CSS. Placeholders show where assets/embeds go.',
+      ),
+      h('div', { className: 'preview-shell border border-stone-200 rounded-lg overflow-hidden' },
+        h('div', { className: 'bg-hero' },
+          h('div', { className: 'logo-tab' }, h('span', null, 'mirasee')),
+          template.hasVideo && result.video_intro_text && h('div', {
+            style: { color: '#FFC72C', fontWeight: 600, padding: '1.5rem 2rem 0', fontSize: '0.85rem' },
+          }, result.video_intro_text),
+          h('h1', { className: 'hero-headline' }, result.hero_headline || ''),
+          result.hero_subheadline && h('p', { className: 'hero-sub' }, result.hero_subheadline),
+        ),
+        h('div', { className: 'text-content' },
+          template.hasVideo && h('div', { className: 'video-block' },
+            options.wistiaId ? `Wistia: ${options.wistiaId}` : '[ Wistia video ]',
+          ),
+          options.includeTimer && h('div', { className: 'timer-block' },
+            ['DAYS', 'HOURS', 'MINUTES', 'SECONDS'].map(l =>
+              h('div', { className: 'timer-cell', key: l },
+                h('div', { className: 'num' }, '0'),
+                h('div', { className: 'lbl' }, l),
+              ),
+            ),
+          ),
+          template.hasForm && options.formPosition === 'before-body' && h('div', { className: 'form-block' },
+            `[ Ontraport Form · ID: ${options.formId || 'YOUR_FORM_ID'} ]`,
+          ),
+          h('div', { dangerouslySetInnerHTML: { __html: result.body_html || '' } }),
+          template.hasForm && options.formPosition === 'after-body' && h('div', { className: 'form-block' },
+            `[ Ontraport Form · ID: ${options.formId || 'YOUR_FORM_ID'} ]`,
+          ),
+          template.hasForm && options.formPosition === 'middle' && h('div', { className: 'form-block' },
+            `[ Form would render in the middle of the body when the page is built ]`,
+          ),
+          result.cta_text && h('div', { style: { textAlign: 'center', margin: '1.5rem 0' } },
+            h('a', { className: 'cta-btn', href: result.cta_url || '#' }, result.cta_text + ' →'),
+          ),
+          h('div', { className: 'signature-row' },
+            h('img', {
+              src: DANNY_SIGNATURE_COMBINED,
+              alt: 'Danny Iny',
+              onError: (e) => {
+                e.target.style.display = 'none';
+                const fb = document.createElement('div');
+                fb.className = 'ph-fallback';
+                fb.textContent = '[ Danny Iny — headshot + signature ]';
+                e.target.parentElement.appendChild(fb);
+              },
+            }),
+          ),
+        ),
+        h('div', { className: 'footer-bar' },
+          h('div', { className: 'footer-logo' }, 'mirasee'),
+          h('div', null, 'Copyright © 2026 Mirasee. All Rights Reserved.'),
+        ),
+      ),
+    );
+  }
+
+  function SnippetsTab({ result, template, options }) {
+    const snippets = [];
+    snippets.push({
+      label: 'A. Custom CSS — paste into Ontraport Pages → Settings → Custom CSS',
+      help: 'This is the master Mirasee styling. Paste it once per page (or save it as a template).',
+      code: MIRASEE_CSS,
+    });
+    snippets.push({
+      label: 'B. Hero Headline (H1) — drop into the hero text element',
+      help: 'Paste this into Ontraport\'s headline element on the hero section.',
+      code: `<h1 style="color:white;text-align:center;font-weight:700;">${escapeHtml(result.hero_headline || '')}</h1>`,
+    });
+    if (result.hero_subheadline) {
+      snippets.push({
+        label: 'C. Hero Subheadline — drop below the H1 in the hero',
+        help: 'Use a Text element. The light blue color is the Mirasee subhead style.',
+        code: `<p style="color:#9DD9F3;text-align:center;font-weight:600;font-size:1.15rem;">${escapeHtml(result.hero_subheadline)}</p>`,
+      });
+    }
+    if (template.hasVideo) {
+      if (result.video_intro_text) {
+        snippets.push({
+          label: 'D. Video intro text (above the video)',
+          help: 'Yellow expiry/notice line that sits above the video.',
+          code: `<p style="color:#FFC72C;text-align:center;font-weight:600;">${escapeHtml(result.video_intro_text)}</p>`,
+        });
+      }
+      snippets.push({
+        label: 'E. Wistia Video Embed',
+        help: 'Drop this into an HTML element where you want the video to appear.',
+        code: generateWistiaBlock(options.wistiaId),
+      });
+    }
+    if (options.includeTimer) {
+      snippets.push({
+        label: 'F. Countdown Timer (visual frame)',
+        help: 'For a real live counter, use Ontraport\'s built-in countdown widget. This is the styled wrapper if you need a custom one.',
+        code: generateTimerBlock(),
+      });
+    }
+    snippets.push({
+      label: 'G. Body copy — drop into the main text element below the hero',
+      help: 'This is the structured body content with paragraphs and bold/italic formatting.',
+      code: result.body_html || '',
+    });
+    if (template.hasForm) {
+      snippets.push({
+        label: `H. Ontraport Form (position: ${options.formPosition})`,
+        help: 'Recommendation: use the native Form element in Ontraport Pages and select this form ID — cleaner than the script embed.',
+        code: generateOntraportFormBlock(options.formId),
+      });
+    }
+    if (result.cta_text) {
+      snippets.push({
+        label: 'I. CTA Button',
+        help: 'Yellow rounded button in the Mirasee style. Replace the href with your actual link.',
+        code: `<div style="text-align:center;margin:2rem 0;">
+  <a href="${escapeHtml(result.cta_url || '#')}" style="background:#FFC72C;color:#0A1530;font-weight:700;padding:1rem 2.5rem;border-radius:999px;display:inline-block;text-decoration:none;font-size:1.05rem;">${escapeHtml(result.cta_text)} →</a>
+</div>`,
+      });
+    }
+    snippets.push({
+      label: 'J. Signature row (Danny Iny — headshot + signature)',
+      help: 'The combined Danny Iny headshot + signature image, hardcoded to the Mirasee asset URL. Drop this directly into an HTML element.',
+      code: generateSignaturePlaceholder(),
+    });
+
+    return h('div', { className: 'space-y-4' },
+      h('p', { className: 'text-xs text-stone-500' },
+        'Copy each block and paste it into the matching Ontraport Pages element. They\'re ordered roughly top-to-bottom of the page.',
+      ),
+      ...snippets.map((s, i) => h(SnippetBlock, { key: i, ...s })),
+    );
+  }
+
+  function StandaloneTab({ result, templateKey, options }) {
+    const html = buildStandaloneHTML(templateKey, result, options);
+    function downloadHTML() {
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `mirasee-${templateKey}-${Date.now()}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    function openPreview() {
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    }
+    return h('div', null,
+      h('div', { className: 'flex items-center gap-2 mb-3' },
+        h('button', {
+          onClick: openPreview,
+          className: 'px-4 py-2 rounded-lg bg-mirasee-blue text-white text-sm font-semibold hover:opacity-90',
+        }, '🔗 Open in new tab'),
+        h('button', {
+          onClick: downloadHTML,
+          className: 'px-4 py-2 rounded-lg border border-stone-300 text-sm font-semibold hover:bg-stone-50',
+        }, '⬇️  Download .html'),
+        h(CopyButton, { text: html, label: 'Copy HTML' }),
+      ),
+      h('p', { className: 'text-xs text-stone-500 mb-3' },
+        'A complete standalone HTML file. Useful for previewing the page outside Ontraport, sharing with stakeholders, or as a backup reference. NOT for pasting into Ontraport — use the Snippets tab for that.',
+      ),
+      h('pre', { className: 'code-block' }, html),
+    );
+  }
+
+  function ChecklistTab({ result, template, options }) {
+    const steps = [];
+    steps.push('Open Ontraport → Pages → New Landing Page (or duplicate an existing Mirasee template).');
+    steps.push('Open Page Settings → Custom CSS, paste the CSS from snippet A. Save.');
+    steps.push('Drag a Section element. Set its background to transparent and add the class "bg-hero" (or apply via custom CSS).');
+    steps.push('Inside the hero section, add a Text element at the top-left with class "logo-tab" — upload the Mirasee logo image.');
+    steps.push(`Add a Headline element. Paste the H1 from snippet B: "${result.hero_headline}".`);
+    if (result.hero_subheadline) {
+      steps.push(`Add a Text element below the headline. Paste snippet C (subheadline) so it shows in light blue.`);
+    }
+    steps.push('Drag a new Section below the hero. Add the class "text-content" so it overlaps the hero (negative margin pulls it up over the curve).');
+    if (template.hasVideo) {
+      if (result.video_intro_text) steps.push('Inside the text-content section, add a Text element with snippet D (yellow video intro).');
+      steps.push(`Add an HTML element. Paste snippet E (Wistia embed). Wistia ID: ${options.wistiaId || '⚠️  not set — replace YOUR_WISTIA_ID'}.`);
+    }
+    if (options.includeTimer) {
+      steps.push('Add Ontraport\'s native Countdown element OR an HTML element with snippet F. Set the target date in Ontraport.');
+    }
+    if (template.hasForm && options.formPosition === 'before-body') {
+      steps.push(`Add the Ontraport Form element. Select form ID ${options.formId}. (This goes BEFORE the body copy.)`);
+    }
+    steps.push('Add a Text element. Paste snippet G (body copy) into the rich-text editor in Source/HTML mode.');
+    if (template.hasForm && options.formPosition === 'middle') {
+      steps.push(`Add the Ontraport Form element in the middle of the body. Select form ID ${options.formId}.`);
+    }
+    if (template.hasForm && options.formPosition === 'after-body') {
+      steps.push(`Add the Ontraport Form element after the body copy. Select form ID ${options.formId}.`);
+    }
+    if (result.cta_text) {
+      steps.push(`Add a Button element. Label: "${result.cta_text}". Style: Mirasee yellow (#FFC72C), pill rounded, dark text. URL: ${result.cta_url || 'set this manually'}.`);
+    }
+    steps.push('Add the signature row (snippet J) — upload Danny\'s headshot and signature image, replace the placeholder URLs.');
+    steps.push('Add a Footer section with the mirasee logo (left) and "Copyright © 2026 Mirasee. All Rights Reserved." (right).');
+    steps.push('Preview the page. Check mobile view. Save & publish.');
+
+    return h('div', null,
+      h('p', { className: 'text-xs text-stone-500 mb-4' },
+        'Step-by-step build instructions for this specific page. Tick off as you go.',
+      ),
+      h('ol', { className: 'space-y-2' },
+        steps.map((s, i) =>
+          h('li', { key: i, className: 'flex items-start gap-3 p-3 rounded-lg bg-stone-50 border border-stone-200' },
+            h('span', {
+              className: 'flex-shrink-0 w-6 h-6 rounded-full bg-mirasee-blue text-white text-xs font-bold flex items-center justify-center',
+            }, i + 1),
+            h('div', { className: 'text-sm text-mirasee-ink leading-relaxed' }, s),
+          ),
+        ),
+      ),
+    );
+  }
+
+  function SnippetBlock({ label, help, code }) {
+    return h('div', { className: 'border border-stone-200 rounded-lg overflow-hidden' },
+      h('div', { className: 'px-4 py-2.5 bg-stone-50 border-b border-stone-200 flex items-center justify-between gap-3' },
+        h('div', { className: 'flex-1 min-w-0' },
+          h('div', { className: 'text-xs font-semibold text-mirasee-ink truncate' }, label),
+          help && h('div', { className: 'text-[11px] text-stone-500 mt-0.5' }, help),
+        ),
+        h(CopyButton, { text: code }),
+      ),
+      h('pre', { className: 'code-block !rounded-none !max-h-[280px]' }, code),
+    );
+  }
+
+  function CopyButton({ text, label }) {
+    const [copied, setCopied] = useState(false);
+    function copy() {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    }
+    return h('button', {
+      onClick: copy,
+      className: `px-3 py-1.5 rounded text-xs font-semibold transition flex-shrink-0 ${copied ? 'bg-emerald-500 text-white' : 'bg-mirasee-ink text-white hover:bg-stone-700'}`,
+    }, copied ? '✓ Copied' : (label || 'Copy'));
+  }
+
+  function Footer() {
+    return h('footer', { className: 'mt-12 pt-6 border-t border-stone-200 text-center text-xs text-stone-500' },
+      h('p', null,
+        'Built for the Mirasee design team · ',
+        h('a', { href: 'https://docs.claude.com', className: 'text-mirasee-blue hover:underline' }, 'Powered by Claude'),
+        ' · ',
+        h('span', null, 'Your API key and copy never leave your browser'),
+      ),
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+</script>
+</body>
+</html>

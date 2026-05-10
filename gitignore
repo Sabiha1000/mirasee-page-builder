@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Local env (in case you ever add a backend)
+.env
+.env.local
+
+# Build artifacts (none currently, but future-proofing)
+dist/
+build/
+node_modules/
