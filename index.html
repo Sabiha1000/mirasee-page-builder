@@ -72,28 +72,36 @@
 
   /* The white logo "tab" at the top-left with curved bottom corners */
   .preview-shell .logo-tab {
-    width: 200px;
-    height: 70px;
-    margin-left: 1rem;
-    margin-top: -2px;
-    background-image: url('data:image/svg+xml;utf8,<svg width="264" height="88" viewBox="0 0 264 88" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M33.5 40.5C32.1278 25.8757 22.3889 11.0857 7.39674 5.33114C7.36722 5.31981 7.35246 5.31415 7.30548 5.29718C6.82835 5.1249 6.2145 5.01114 5.70731 5.001C5.65736 5 5.62001 5 5.54532 5H2.5C1.11929 5 0 3.88071 0 2.5C0 1.11929 1.11929 0 2.5 0H261.5C262.881 0 264 1.11929 264 2.5C264 3.88071 262.881 5 261.5 5H260.161C259.724 5 259.287 5.07343 258.878 5.22697C243.73 10.9055 233.881 25.7866 232.5 40.5V77.5C232.5 82.214 232.5 84.5711 231.036 86.0355C229.571 87.5 227.214 87.5 222.5 87.5H43.5C38.786 87.5 36.4289 87.5 34.9645 86.0355C33.5 84.5711 33.5 82.214 33.5 77.5V40.5Z" fill="white"/></svg>');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: top left;
+    width: 180px;
+    height: 64px;
+    margin-left: 1.5rem;
+    margin-top: 0;
+    background: white;
+    border-radius: 0 0 28px 28px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    padding-top: 0.85rem;
     position: relative;
     z-index: 3;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
+  .preview-shell .logo-tab::before,
+  .preview-shell .logo-tab::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background: white;
+  }
+  .preview-shell .logo-tab::before { left: -12px; mask: radial-gradient(circle at 0 100%, transparent 12px, black 12px); -webkit-mask: radial-gradient(circle at 0 100%, transparent 12px, black 12px); }
+  .preview-shell .logo-tab::after { right: -12px; mask: radial-gradient(circle at 100% 100%, transparent 12px, black 12px); -webkit-mask: radial-gradient(circle at 100% 100%, transparent 12px, black 12px); }
   .preview-shell .logo-tab span {
     font-family: 'Montserrat', sans-serif;
     color: #013EA6;
     font-weight: 800;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     letter-spacing: -0.02em;
-    margin-left: -0.5rem;
   }
 
   .preview-shell .hero-headline {
@@ -197,12 +205,57 @@
     border-radius: 4px;
   }
   .preview-shell .form-block {
-    border: 2px dashed #FFC72C;
-    background: #FFFBEB;
-    padding: 1.5rem; text-align: center;
-    color: #92400E; font-size: 0.85rem; font-weight: 600;
-    margin: 1.25rem 0;
+    background: #FBF8F1;
+    padding: 1.75rem;
+    margin: 1.5rem 0;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+  }
+  .preview-shell .form-block .form-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #6b7280;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .preview-shell .form-block .form-id {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #013EA6;
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .preview-shell .form-block .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .preview-shell .form-block .form-input {
+    background: white;
+    border: 1px solid #e5e7eb;
     border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .preview-shell .form-block .form-submit {
+    background: #FFC72C;
+    color: #0A1530;
+    border: none;
+    border-radius: 999px;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    cursor: default;
+    margin-top: 0.25rem;
   }
   .preview-shell .footer-bar {
     border-top: 1px solid #e5e7eb;
@@ -342,6 +395,7 @@
       icon: '📄',
       hasVideo: false,
       hasForm: false,
+      mode: 'oneshot',
     },
     'video-landing': {
       name: 'Video Landing',
@@ -349,6 +403,7 @@
       icon: '🎬',
       hasVideo: true,
       hasForm: false,
+      mode: 'oneshot',
     },
     'text-form-landing': {
       name: 'Text Landing with Form',
@@ -356,6 +411,15 @@
       icon: '📝',
       hasVideo: false,
       hasForm: true,
+      mode: 'oneshot',
+    },
+    'body-section': {
+      name: 'Body Section Only',
+      description: 'Chat with AI to generate body sections (no header). Mirasee styled. Drop into pages with existing headers.',
+      icon: '💬',
+      hasVideo: false,
+      hasForm: false,
+      mode: 'chat',
     },
   };
 
@@ -416,6 +480,130 @@ OUTPUT FORMAT (JSON, no other text):
     // Strip code fences if Claude added them
     const cleaned = text.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/```\s*$/, '').trim();
     return JSON.parse(cleaned);
+  }
+
+  // ----- Chat API call (for body-section template) -----
+  async function callClaudeChat(apiKey, systemPrompt, messages) {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 4000,
+        system: systemPrompt,
+        messages: messages,
+      }),
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`API error ${res.status}: ${err}`);
+    }
+    const data = await res.json();
+    return data.content.map(b => b.type === 'text' ? b.text : '').join('').trim();
+  }
+
+  function cleanHtmlResponse(text) {
+    // Strip code fences if AI wrapped the output
+    let cleaned = text.trim();
+    cleaned = cleaned.replace(/^```html\s*/i, '');
+    cleaned = cleaned.replace(/^```\s*/, '');
+    cleaned = cleaned.replace(/```\s*$/, '');
+    return cleaned.trim();
+  }
+
+  // Replace {{IMAGE_N}} placeholders with actual data URLs for the preview only.
+  // The exported code keeps the {{IMAGE_N}} placeholders (or the user can pre-replace them).
+  function applyImagePlaceholders(html, images) {
+    if (!html || !images || images.length === 0) return html;
+    let result = html;
+    images.forEach((img, idx) => {
+      const placeholder = `{{IMAGE_${idx + 1}}}`;
+      const regex = new RegExp(placeholder.replace(/[{}]/g, '\\$&'), 'g');
+      result = result.replace(regex, img.dataUrl);
+    });
+    return result;
+  }
+
+  // ----- System prompt for the Body Section chat template -----
+  function buildBodySectionSystemPrompt() {
+    return `You are a Mirasee body-section designer. You generate clean HTML body sections for Mirasee landing pages — sections that drop into pages where the header (blue gradient hero with curve) is already built into the template. You only output the body section, NOT a full HTML document.
+
+LOCKED MIRASEE BRAND CONSTRAINTS (NEVER violate these regardless of what the user asks):
+- Font: Montserrat ONLY. Never use any other font.
+- Font weights: ONLY 400 (regular), 500 (medium), or 600 (semibold). NEVER use 700, 800, 900, or "bold".
+- Colors (use ONLY these for primary content, accents, headlines, links, buttons):
+  * Mirasee Blue: #013EA6 (primary)
+  * Mirasee Teal: #0089BD (accent)
+  * Mirasee Yellow: #FFC72C (CTA buttons, highlights)
+  * Mirasee Ink: #0A1530 (body text on light backgrounds)
+  * White: #FFFFFF (text on dark backgrounds)
+  * Light cream: #FBF8F1 (background variations)
+  * Neutrals: #E5E7EB (borders), #6B7280 (muted text)
+- Backgrounds: white (default), light cream (#FBF8F1), or Mirasee blue (#013EA6) for emphasis sections.
+
+LAYOUT FREEDOM (you have creative freedom here):
+- You can build any layout the user describes: bullet lists, quote blocks, callout cards, multi-column grids, FAQ accordions, comparison tables, testimonial cards, CTA sections, feature lists, "what you'll learn" boxes, before/after blocks, stat counters, etc.
+- Use modern, clean, professional aesthetics. Generous whitespace. Clear visual hierarchy.
+
+ICONS:
+- For bullet points and feature lists, use Lucide outline icons via inline SVG. Pick semantically appropriate icons. Examples:
+  * "checkmark / approval / yes" → check, check-circle
+  * "ideas / inspiration" → lightbulb
+  * "growth / progress" → trending-up, arrow-up-right
+  * "people / community" → users, user-plus
+  * "time / schedule" → clock, calendar
+  * "target / goal" → target, crosshair
+  * "learning / education" → graduation-cap, book-open
+  * "money / value" → dollar-sign, gift
+  * "speed / efficiency" → zap, gauge
+  * "security / trust" → shield, lock
+  * "communication" → message-circle, mail
+  * "warning / important" → alert-triangle, info
+- Always use stroke-width="1.5" or "2", stroke="currentColor", fill="none" for outline style.
+- Inline the SVG directly in the HTML (don't link to external icon libraries).
+- Icon size: 20-28px usually. Color: Mirasee Blue or Teal for accent, Yellow for emphasis.
+
+ANIMATIONS (subtle, professional, never flashy):
+- Hover effects on CTAs and clickable elements: smooth color transitions, slight lift (transform: translateY(-2px)), subtle shadow.
+- Optional: gentle fade-in on scroll using CSS animations (animation: fadeIn 0.6s ease-out).
+- NEVER use bouncy, spinning, or attention-grabbing animations.
+- Use CSS transitions like \`transition: all 0.2s ease\`.
+
+CODE OUTPUT RULES:
+- Output ONLY the HTML for the body section. No <html>, <head>, <body> tags.
+- Wrap your section in a single <div> or <section> with style attribute or a CSS-scoped <style> tag at the top.
+- ALWAYS use inline styles or a <style> block at the top of your output (since this will be pasted into Ontraport's HTML element which has its own styling).
+- Use semantic HTML: <h2>, <h3>, <p>, <ul>, <li>, <blockquote>, <a>, <button>.
+- Make it responsive: use max-width, percentage widths, flex-wrap, or CSS grid with auto-fit.
+- Default container max-width: 800px, centered with margin: 0 auto.
+- Default padding: 2rem (mobile-friendly).
+
+HANDLING UPLOADED IMAGES:
+- If the user has attached images, look at them and use them in the section. You can SEE the image content.
+- For images, use the placeholder URL "{{IMAGE_1}}", "{{IMAGE_2}}", etc. in order of attachment.
+  Example: <img src="{{IMAGE_1}}" alt="..." style="...">
+  The user will replace these placeholders with real hosted URLs after pasting into Ontraport.
+- Always write descriptive alt text based on what you actually see in the image.
+- Style images appropriately for the layout: rounded for headshots, full-width for hero images, contained for product shots.
+- Add subtle styling: border-radius, box-shadow, max-width, height: auto for responsiveness.
+- If the user uploads multiple images, decide intelligently how to lay them out: side-by-side grid, single column, or as part of a feature/testimonial structure.
+- Tell the user briefly what you saw in the image only if it helps clarify your design choice (but the main output is still just HTML).
+
+WHEN USER ASKS FOR EDITS:
+- Read the current HTML provided in the user's message context.
+- Make ONLY the requested change. Don't redesign the whole thing unless asked.
+- Preserve the user's previous customizations.
+- Preserve {{IMAGE_N}} placeholders unless explicitly told to remove an image.
+
+OUTPUT FORMAT:
+- Return ONLY the HTML code. No explanation, no markdown fences, no preamble.
+- Start directly with <div>, <section>, or <style>.
+- The output should be paste-ready into an Ontraport HTML element (after replacing {{IMAGE_N}} placeholders with real URLs).`;
   }
 
   // ----- Generators for the various output blocks -----
@@ -575,6 +763,8 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
     const [apiKey, setApiKey] = useState(() => localStorage.getItem('claude_api_key') || '');
     const [showApiKey, setShowApiKey] = useState(false);
     const [templateKey, setTemplateKey] = useState('text-landing');
+
+    // Oneshot mode state
     const [rawCopy, setRawCopy] = useState('');
     const [includeTimer, setIncludeTimer] = useState(false);
     const [wistiaId, setWistiaId] = useState('');
@@ -583,8 +773,17 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [result, setResult] = useState(null);
-    const [outputMode, setOutputMode] = useState('snippets'); // 'snippets' or 'standalone'
+    const [outputMode, setOutputMode] = useState('snippets');
     const [activeTab, setActiveTab] = useState('preview');
+
+    // Chat mode state
+    const [chatMessages, setChatMessages] = useState([]); // [{role, content, html?, images?}]
+    const [chatInput, setChatInput] = useState('');
+    const [chatAttachments, setChatAttachments] = useState([]); // [{id, name, base64, mediaType, dataUrl, sizeKb}]
+    const [chatLoading, setChatLoading] = useState(false);
+    const [currentHtml, setCurrentHtml] = useState('');
+    const [chatHistory, setChatHistory] = useState([]); // for revert
+    const [allUploadedImages, setAllUploadedImages] = useState([]); // running list of all images uploaded in this session, used for preview substitution
 
     // Persist API key locally so it isn't re-entered each time
     useEffect(() => {
@@ -592,6 +791,16 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
     }, [apiKey]);
 
     const template = TEMPLATES[templateKey];
+    const isChat = template.mode === 'chat';
+
+    // Reset chat state when switching to/from chat mode
+    useEffect(() => {
+      if (isChat) {
+        // entering chat mode — keep chat history
+      } else {
+        // leaving chat mode — keep chat state for when they return
+      }
+    }, [templateKey]);
 
     async function handleGenerate() {
       setError('');
@@ -621,31 +830,150 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
       }
     }
 
+    async function handleChatSend() {
+      const message = chatInput.trim();
+      const attachments = chatAttachments;
+      // Allow sending if there's text OR at least one image
+      if (!message && attachments.length === 0) return;
+      if (!apiKey.trim()) {
+        setError('Please enter your Anthropic API key first.');
+        return;
+      }
+      setError('');
+      setChatLoading(true);
+
+      // Save state for revert
+      setChatHistory(prev => [...prev, { messages: chatMessages, html: currentHtml, allUploadedImages }]);
+
+      // Track these images globally for preview substitution (append to running list)
+      const newAllImages = [...allUploadedImages, ...attachments];
+      setAllUploadedImages(newAllImages);
+
+      // Append user message to chat (with image previews for display)
+      const userMsg = {
+        role: 'user',
+        content: message || '(image only)',
+        images: attachments.map(a => ({ name: a.name, dataUrl: a.dataUrl, sizeKb: a.sizeKb })),
+      };
+      const newMessages = [...chatMessages, userMsg];
+      setChatMessages(newMessages);
+      setChatInput('');
+      setChatAttachments([]);
+
+      try {
+        const sys = buildBodySectionSystemPrompt();
+        // Build API messages — Anthropic accepts multimodal content array
+        const apiMessages = [];
+        for (let i = 0; i < newMessages.length; i++) {
+          const m = newMessages[i];
+          const isLast = (i === newMessages.length - 1);
+          if (m.role === 'user') {
+            const contentBlocks = [];
+            // Add image blocks first (if any) — only the actual current attachments
+            // For historical messages we skip re-sending images (would cost too much)
+            if (isLast && attachments.length > 0) {
+              for (const att of attachments) {
+                contentBlocks.push({
+                  type: 'image',
+                  source: {
+                    type: 'base64',
+                    media_type: att.mediaType,
+                    data: att.base64,
+                  },
+                });
+              }
+            }
+            // Build the text content
+            let textContent = m.content;
+            const startIdx = allUploadedImages.length + 1;
+            const endIdx = allUploadedImages.length + attachments.length;
+            const imageNoteForLast = isLast && attachments.length > 0
+              ? `\n\n[The user has attached ${attachments.length} image(s). Refer to them as ${attachments.length === 1 ? `{{IMAGE_${startIdx}}}` : `{{IMAGE_${startIdx}}} through {{IMAGE_${endIdx}}}`} in the HTML output. Always use this exact placeholder format.]`
+              : '';
+            if (isLast && currentHtml && newMessages.length > 1) {
+              textContent = `Current HTML you previously generated:\n\`\`\`html\n${currentHtml}\n\`\`\`\n\nUser request: ${message || 'Use the attached image(s) appropriately.'}${imageNoteForLast}`;
+            } else if (isLast) {
+              const baseText = message || 'Use the attached image(s) appropriately in a Mirasee body section.';
+              textContent = `${baseText}${imageNoteForLast}`;
+            }
+            contentBlocks.push({ type: 'text', text: textContent });
+            apiMessages.push({ role: 'user', content: contentBlocks });
+          } else {
+            // Assistant messages — text only (the HTML they previously generated)
+            apiMessages.push({ role: 'assistant', content: m.html || m.content });
+          }
+        }
+
+        const responseHtml = await callClaudeChat(apiKey, sys, apiMessages);
+        const cleaned = cleanHtmlResponse(responseHtml);
+        setCurrentHtml(cleaned);
+        setChatMessages([...newMessages, { role: 'assistant', content: 'Updated.', html: cleaned }]);
+      } catch (e) {
+        setError(e.message || String(e));
+        // Roll back the user message and restore attachments on error
+        setChatMessages(chatMessages);
+        setChatAttachments(attachments);
+        setChatInput(message);
+      } finally {
+        setChatLoading(false);
+      }
+    }
+
+    function handleRevert() {
+      if (chatHistory.length === 0) return;
+      const last = chatHistory[chatHistory.length - 1];
+      setChatMessages(last.messages);
+      setCurrentHtml(last.html);
+      setAllUploadedImages(last.allUploadedImages || []);
+      setChatHistory(chatHistory.slice(0, -1));
+    }
+
+    function handleClearChat() {
+      if (chatMessages.length === 0) return;
+      if (!confirm('Clear the chat and start fresh? This cannot be undone.')) return;
+      setChatMessages([]);
+      setCurrentHtml('');
+      setChatHistory([]);
+      setAllUploadedImages([]);
+      setChatAttachments([]);
+    }
+
     return h('div', { className: 'min-h-screen' },
       h(Header, null),
       h('main', { className: 'max-w-7xl mx-auto px-6 py-8' },
         h(ApiKeyBar, { apiKey, setApiKey, showApiKey, setShowApiKey }),
-        h('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6' },
-          // LEFT: Input panel
-          h(InputPanel, {
-            templateKey, setTemplateKey,
-            rawCopy, setRawCopy,
-            includeTimer, setIncludeTimer,
-            wistiaId, setWistiaId,
-            formId, setFormId,
-            formPosition, setFormPosition,
-            template,
-            onGenerate: handleGenerate,
-            loading, error,
-          }),
-          // RIGHT: Output panel
-          h(OutputPanel, {
-            result, loading, template, templateKey,
-            options: { includeTimer, wistiaId, formId, formPosition },
-            outputMode, setOutputMode,
-            activeTab, setActiveTab,
-          }),
-        ),
+        isChat
+          ? h(ChatModeView, {
+              templateKey, setTemplateKey, template,
+              chatMessages, chatInput, setChatInput,
+              chatAttachments, setChatAttachments,
+              chatLoading, currentHtml,
+              allUploadedImages,
+              chatHistory,
+              onSend: handleChatSend,
+              onRevert: handleRevert,
+              onClear: handleClearChat,
+              error, setError,
+            })
+          : h('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6' },
+              h(InputPanel, {
+                templateKey, setTemplateKey,
+                rawCopy, setRawCopy,
+                includeTimer, setIncludeTimer,
+                wistiaId, setWistiaId,
+                formId, setFormId,
+                formPosition, setFormPosition,
+                template,
+                onGenerate: handleGenerate,
+                loading, error,
+              }),
+              h(OutputPanel, {
+                result, loading, template, templateKey,
+                options: { includeTimer, wistiaId, formId, formPosition },
+                outputMode, setOutputMode,
+                activeTab, setActiveTab,
+              }),
+            ),
         h(Footer, null),
       ),
     );
@@ -724,14 +1052,17 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
       // Template picker
       h('div', { className: 'mb-5' },
         h('label', { className: 'block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2' }, 'Template'),
-        h('div', { className: 'grid grid-cols-3 gap-2' },
+        h('div', { className: 'grid grid-cols-2 gap-2' },
           Object.entries(TEMPLATES).map(([key, t]) =>
             h('button', {
               key,
               onClick: () => setTemplateKey(key),
               className: `p-3 rounded-lg border-2 text-left transition ${templateKey === key ? 'border-mirasee-blue bg-blue-50' : 'border-stone-200 hover:border-stone-300'}`,
             },
-              h('div', { className: 'text-xl mb-1' }, t.icon),
+              h('div', { className: 'flex items-center gap-2 mb-1' },
+                h('span', { className: 'text-xl' }, t.icon),
+                t.mode === 'chat' && h('span', { className: 'text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-mirasee-yellow text-mirasee-ink' }, 'NEW'),
+              ),
               h('div', { className: 'text-xs font-semibold text-mirasee-ink leading-tight' }, t.name),
             ),
           ),
@@ -919,16 +1250,10 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
               ),
             ),
           ),
-          template.hasForm && options.formPosition === 'before-body' && h('div', { className: 'form-block' },
-            `[ Ontraport Form · ID: ${options.formId || 'YOUR_FORM_ID'} ]`,
-          ),
+          template.hasForm && options.formPosition === 'before-body' && h(FormPreviewBlock, { formId: options.formId }),
           h('div', { dangerouslySetInnerHTML: { __html: result.body_html || '' } }),
-          template.hasForm && options.formPosition === 'after-body' && h('div', { className: 'form-block' },
-            `[ Ontraport Form · ID: ${options.formId || 'YOUR_FORM_ID'} ]`,
-          ),
-          template.hasForm && options.formPosition === 'middle' && h('div', { className: 'form-block' },
-            `[ Form would render in the middle of the body when the page is built ]`,
-          ),
+          template.hasForm && options.formPosition === 'after-body' && h(FormPreviewBlock, { formId: options.formId }),
+          template.hasForm && options.formPosition === 'middle' && h(FormPreviewBlock, { formId: options.formId, isMiddle: true }),
           result.cta_text && h('div', { style: { textAlign: 'center', margin: '1.5rem 0' } },
             h('a', { className: 'cta-btn', href: result.cta_url || '#' }, result.cta_text + ' →'),
           ),
@@ -950,6 +1275,18 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
           h('div', { className: 'footer-logo' }, 'mirasee'),
           h('div', null, 'Copyright © 2026 Mirasee. All Rights Reserved.'),
         ),
+      ),
+    );
+  }
+
+  function FormPreviewBlock({ formId, isMiddle }) {
+    return h('div', { className: 'form-block' },
+      h('span', { className: 'form-label' }, isMiddle ? 'Ontraport Form (mid-body)' : 'Ontraport Form'),
+      h('span', { className: 'form-id' }, `ID: ${formId || 'YOUR_FORM_ID'}`),
+      h('div', { className: 'form-fields' },
+        h('div', { className: 'form-input' }, 'Email Address'),
+        h('div', { className: 'form-input' }, 'First Name'),
+        h('button', { className: 'form-submit' }, 'Subscribe →'),
       ),
     );
   }
@@ -1141,6 +1478,417 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; backgro
       onClick: copy,
       className: `px-3 py-1.5 rounded text-xs font-semibold transition flex-shrink-0 ${copied ? 'bg-emerald-500 text-white' : 'bg-mirasee-ink text-white hover:bg-stone-700'}`,
     }, copied ? '✓ Copied' : (label || 'Copy'));
+  }
+
+  // ============================================================
+  // CHAT MODE VIEW (Body Section template)
+  // ============================================================
+
+  function ChatModeView({
+    templateKey, setTemplateKey, template,
+    chatMessages, chatInput, setChatInput,
+    chatAttachments, setChatAttachments,
+    chatLoading, currentHtml,
+    allUploadedImages,
+    chatHistory,
+    onSend, onRevert, onClear,
+    error, setError,
+  }) {
+    return h('div', { className: 'mt-6 grid grid-cols-1 lg:grid-cols-5 gap-6' },
+      // LEFT: Template picker + chat
+      h('div', { className: 'lg:col-span-2 space-y-4' },
+        h(TemplatePickerCard, { templateKey, setTemplateKey, template }),
+        h(ChatPanel, {
+          chatMessages, chatInput, setChatInput,
+          chatAttachments, setChatAttachments,
+          chatLoading, chatHistory,
+          onSend, onRevert, onClear,
+          error, setError,
+        }),
+      ),
+      // RIGHT: Preview + code (top + bottom)
+      h('div', { className: 'lg:col-span-3 space-y-4' },
+        h(BodySectionPreview, { currentHtml, chatLoading, allUploadedImages }),
+        h(BodySectionCode, { currentHtml, allUploadedImages }),
+      ),
+    );
+  }
+
+  function TemplatePickerCard({ templateKey, setTemplateKey, template }) {
+    return h('div', { className: 'bg-white rounded-xl border border-stone-200 p-5 shadow-sm' },
+      h('label', { className: 'block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2' }, 'Template'),
+      h('div', { className: 'grid grid-cols-2 gap-2' },
+        Object.entries(TEMPLATES).map(([key, t]) =>
+          h('button', {
+            key,
+            onClick: () => setTemplateKey(key),
+            className: `p-2.5 rounded-lg border-2 text-left transition ${templateKey === key ? 'border-mirasee-blue bg-blue-50' : 'border-stone-200 hover:border-stone-300'}`,
+          },
+            h('div', { className: 'flex items-center gap-1.5 mb-0.5' },
+              h('span', { className: 'text-base' }, t.icon),
+              t.mode === 'chat' && h('span', { className: 'text-[8px] font-bold uppercase tracking-wider px-1 py-0.5 rounded bg-mirasee-yellow text-mirasee-ink' }, 'NEW'),
+            ),
+            h('div', { className: 'text-[11px] font-semibold text-mirasee-ink leading-tight' }, t.name),
+          ),
+        ),
+      ),
+      h('p', { className: 'text-xs text-stone-500 mt-2' }, template.description),
+    );
+  }
+
+  // Helper: read a File as base64 + dataURL
+  function readFileAsImage(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = reader.result;
+        const base64 = dataUrl.split(',')[1];
+        resolve({
+          id: Math.random().toString(36).slice(2),
+          name: file.name,
+          mediaType: file.type,
+          base64,
+          dataUrl,
+          sizeKb: Math.round(file.size / 1024),
+        });
+      };
+      reader.onerror = () => reject(new Error('Could not read ' + file.name));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function ChatPanel({ chatMessages, chatInput, setChatInput, chatAttachments, setChatAttachments, chatLoading, chatHistory, onSend, onRevert, onClear, error, setError }) {
+    const scrollRef = useRef(null);
+    const fileInputRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+
+    useEffect(() => {
+      if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }, [chatMessages, chatLoading]);
+
+    function handleKeyDown(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        onSend();
+      }
+    }
+
+    async function processFiles(fileList) {
+      const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+      if (files.length === 0) {
+        setError('Only image files (.jpg, .png, .webp, .gif) can be attached.');
+        return;
+      }
+      // Anthropic API has a 5MB per-image limit. Warn if too big.
+      const tooBig = files.filter(f => f.size > 5 * 1024 * 1024);
+      if (tooBig.length > 0) {
+        setError(`These images exceed 5MB and won't upload: ${tooBig.map(f => f.name).join(', ')}. Try compressing them.`);
+      }
+      const ok = files.filter(f => f.size <= 5 * 1024 * 1024);
+      try {
+        const processed = await Promise.all(ok.map(readFileAsImage));
+        setChatAttachments([...chatAttachments, ...processed]);
+      } catch (e) {
+        setError('Could not read image: ' + e.message);
+      }
+    }
+
+    function handleFilePick(e) {
+      processFiles(e.target.files);
+      e.target.value = ''; // reset so the same file can be selected twice in a row
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      setIsDragging(false);
+      processFiles(e.dataTransfer.files);
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      setIsDragging(true);
+    }
+
+    function handleDragLeave(e) {
+      e.preventDefault();
+      // Only un-set if we're leaving the panel itself, not entering a child
+      if (e.currentTarget === e.target) setIsDragging(false);
+    }
+
+    function removeAttachment(id) {
+      setChatAttachments(chatAttachments.filter(a => a.id !== id));
+    }
+
+    async function handlePaste(e) {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      const imageItems = [];
+      for (const item of items) {
+        if (item.type.startsWith('image/')) {
+          const f = item.getAsFile();
+          if (f) imageItems.push(f);
+        }
+      }
+      if (imageItems.length > 0) {
+        e.preventDefault();
+        processFiles(imageItems);
+      }
+    }
+
+    return h('div', {
+      className: `bg-white rounded-xl border-2 shadow-sm overflow-hidden flex flex-col transition-colors ${isDragging ? 'border-mirasee-blue bg-blue-50' : 'border-stone-200'}`,
+      style: { height: '600px' },
+      onDrop: handleDrop,
+      onDragOver: handleDragOver,
+      onDragLeave: handleDragLeave,
+    },
+      // Chat header
+      h('div', { className: 'px-4 py-3 border-b border-stone-200 flex items-center justify-between flex-shrink-0' },
+        h('div', null,
+          h('h2', { className: 'font-display text-base font-semibold text-mirasee-ink flex items-center gap-2' },
+            h('span', null, '💬'),
+            'Chat with AI',
+          ),
+          h('p', { className: 'text-[11px] text-stone-500' }, 'Type, attach images, drag-drop, or paste'),
+        ),
+        h('div', { className: 'flex items-center gap-1' },
+          chatHistory.length > 0 && h('button', {
+            onClick: onRevert,
+            title: 'Undo last change',
+            className: 'px-2 py-1 text-[11px] text-stone-600 hover:text-mirasee-blue rounded hover:bg-stone-100',
+          }, '↶ Undo'),
+          chatMessages.length > 0 && h('button', {
+            onClick: onClear,
+            title: 'Clear chat and start fresh',
+            className: 'px-2 py-1 text-[11px] text-stone-600 hover:text-red-600 rounded hover:bg-stone-100',
+          }, 'Clear'),
+        ),
+      ),
+
+      // Drag overlay
+      isDragging && h('div', { className: 'flex-1 flex items-center justify-center p-8 pointer-events-none' },
+        h('div', { className: 'text-center' },
+          h('div', { className: 'text-4xl mb-2' }, '📎'),
+          h('p', { className: 'text-sm font-semibold text-mirasee-blue' }, 'Drop images here'),
+          h('p', { className: 'text-xs text-stone-500 mt-1' }, 'JPG, PNG, WebP, GIF · max 5MB each'),
+        ),
+      ),
+
+      // Messages area
+      !isDragging && h('div', { ref: scrollRef, className: 'flex-1 overflow-y-auto p-4 space-y-3' },
+        chatMessages.length === 0 && h(ChatEmptyState, null),
+        chatMessages.map((msg, i) =>
+          h(ChatMessage, { key: i, msg, index: i }),
+        ),
+        chatLoading && h(ChatLoadingMessage, null),
+      ),
+
+      // Error
+      error && h('div', { className: 'px-4 py-2 bg-red-50 border-t border-red-200 text-xs text-red-800 flex-shrink-0 flex items-center justify-between' },
+        h('span', null, error),
+        h('button', { onClick: () => setError(''), className: 'text-red-600 hover:text-red-800 ml-2 font-bold' }, '×'),
+      ),
+
+      // Attachment thumbnails (above input)
+      chatAttachments.length > 0 && h('div', { className: 'border-t border-stone-200 p-2 bg-stone-50 flex-shrink-0' },
+        h('div', { className: 'flex gap-2 flex-wrap' },
+          chatAttachments.map(att =>
+            h('div', { key: att.id, className: 'relative group' },
+              h('img', {
+                src: att.dataUrl,
+                alt: att.name,
+                className: 'w-16 h-16 object-cover rounded border border-stone-300',
+              }),
+              h('button', {
+                onClick: () => removeAttachment(att.id),
+                className: 'absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-mirasee-ink text-white text-xs flex items-center justify-center hover:bg-red-600',
+                title: 'Remove',
+              }, '×'),
+              h('div', {
+                className: 'absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[9px] px-1 py-0.5 rounded-b truncate',
+              }, `${att.sizeKb}kb`),
+            ),
+          ),
+        ),
+      ),
+
+      // Input area
+      h('div', { className: 'border-t border-stone-200 p-3 flex-shrink-0 bg-stone-50' },
+        h('div', { className: 'flex gap-2 items-end' },
+          // Hidden file input
+          h('input', {
+            ref: fileInputRef,
+            type: 'file',
+            accept: 'image/*',
+            multiple: true,
+            onChange: handleFilePick,
+            style: { display: 'none' },
+          }),
+          // Attach button
+          h('button', {
+            onClick: () => fileInputRef.current?.click(),
+            disabled: chatLoading,
+            title: 'Attach images',
+            className: 'p-2 rounded-lg border border-stone-300 hover:bg-white hover:border-mirasee-blue transition disabled:opacity-50 flex-shrink-0',
+          },
+            h('svg', { width: '18', height: '18', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', strokeLinecap: 'round', strokeLinejoin: 'round' },
+              h('path', { d: 'm21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.99 8.8l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48' }),
+            ),
+          ),
+          h('textarea', {
+            value: chatInput,
+            onChange: e => setChatInput(e.target.value),
+            onKeyDown: handleKeyDown,
+            onPaste: handlePaste,
+            placeholder: chatMessages.length === 0
+              ? 'Describe what you want to build...\n\nTry: "A testimonial section featuring this photo" (and attach an image)'
+              : 'Tell me what to change... (you can also attach more images)',
+            disabled: chatLoading,
+            rows: 3,
+            className: 'flex-1 px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-mirasee-blue/30 focus:border-mirasee-blue resize-none disabled:opacity-50',
+          }),
+          h('button', {
+            onClick: onSend,
+            disabled: chatLoading || (!chatInput.trim() && chatAttachments.length === 0),
+            className: 'px-4 py-2 rounded-lg font-semibold text-white transition disabled:opacity-50 disabled:cursor-not-allowed self-stretch flex items-center justify-center',
+            style: {
+              background: chatLoading ? '#94a3b8' : 'radial-gradient(69.5% 64.74% at 3.29% 7.39%, #0089BD 0%, #013EA6 100%)',
+              minWidth: '80px',
+            },
+          }, chatLoading ? '...' : 'Send'),
+        ),
+        h('div', { className: 'text-[10px] text-stone-400 mt-1 flex items-center justify-between' },
+          h('span', null, 'Enter to send · Shift+Enter for new line · 📎 attach images'),
+          chatAttachments.length > 0 && h('span', { className: 'text-mirasee-blue font-medium' },
+            `${chatAttachments.length} image${chatAttachments.length > 1 ? 's' : ''} attached`,
+          ),
+        ),
+      ),
+    );
+  }
+
+  function ChatEmptyState() {
+    return h('div', { className: 'h-full flex flex-col items-center justify-center text-center px-4 py-8' },
+      h('div', { className: 'text-4xl mb-3 opacity-30' }, '💬'),
+      h('p', { className: 'text-sm font-semibold text-mirasee-ink mb-2' }, 'Start a conversation'),
+      h('p', { className: 'text-xs text-stone-500 max-w-xs leading-relaxed mb-4' },
+        'Describe the body section you want. The AI will generate Mirasee-styled HTML you can paste into Ontraport. Then chat to refine it.',
+      ),
+      h('div', { className: 'text-[11px] text-stone-400 space-y-1.5 max-w-xs text-left bg-stone-50 rounded-lg p-3 border border-stone-200' },
+        h('div', { className: 'font-semibold text-stone-600 mb-1' }, 'Try something like:'),
+        h('div', null, '• "A 3-column grid showing the benefits of our AI training"'),
+        h('div', null, '• "An FAQ section with 5 questions about pricing"'),
+        h('div', null, '• "A quote callout from Danny followed by a yellow CTA"'),
+        h('div', null, '• "What you\'ll learn list with 6 bullets and outline icons"'),
+      ),
+    );
+  }
+
+  function ChatMessage({ msg, index }) {
+    if (msg.role === 'user') {
+      return h('div', { className: 'flex justify-end' },
+        h('div', { className: 'max-w-[85%]' },
+          msg.images && msg.images.length > 0 && h('div', { className: 'flex gap-1.5 flex-wrap mb-1.5 justify-end' },
+            msg.images.map((img, i) =>
+              h('img', {
+                key: i,
+                src: img.dataUrl,
+                alt: img.name,
+                className: 'w-14 h-14 object-cover rounded border border-stone-300',
+                title: `${img.name} (${img.sizeKb}kb)`,
+              }),
+            ),
+          ),
+          msg.content && msg.content !== '(image only)' && h('div', { className: 'px-3 py-2 rounded-lg bg-mirasee-blue text-white text-sm' },
+            msg.content,
+          ),
+        ),
+      );
+    }
+    return h('div', { className: 'flex justify-start' },
+      h('div', { className: 'max-w-[85%] px-3 py-2 rounded-lg bg-stone-100 text-mirasee-ink text-sm flex items-center gap-2' },
+        h('span', { className: 'text-base' }, '✓'),
+        h('span', null, msg.html ? 'Done — preview updated' : msg.content),
+      ),
+    );
+  }
+
+  function ChatLoadingMessage() {
+    return h('div', { className: 'flex justify-start' },
+      h('div', { className: 'px-3 py-2 rounded-lg bg-stone-100 text-mirasee-ink text-sm flex items-center gap-2' },
+        h('span', { className: 'dot-pulse' }), h('span', { className: 'dot-pulse' }), h('span', { className: 'dot-pulse' }),
+        h('span', { className: 'ml-1 text-stone-500' }, 'Thinking...'),
+      ),
+    );
+  }
+
+  function BodySectionPreview({ currentHtml, chatLoading, allUploadedImages }) {
+    // Substitute {{IMAGE_N}} placeholders with data URLs for live preview
+    const previewHtml = applyImagePlaceholders(currentHtml, allUploadedImages);
+    const fullDoc = previewHtml ? `<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; font-family: 'Montserrat', sans-serif; color: #0A1530; background: white; }
+  * { box-sizing: border-box; }
+  /* Cap font weights at 600 even if AI tries to override */
+  h1, h2, h3, h4, h5, h6, strong, b { font-weight: 600 !important; }
+</style>
+</head><body>${previewHtml}</body></html>` : '';
+
+    return h('div', { className: 'bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden' },
+      h('div', { className: 'px-4 py-2.5 border-b border-stone-200 flex items-center justify-between' },
+        h('div', { className: 'flex items-center gap-2' },
+          h('span', { className: 'text-sm' }, '👁'),
+          h('span', { className: 'text-xs font-semibold text-mirasee-ink' }, 'Live Preview'),
+        ),
+        currentHtml && h('span', { className: 'text-[10px] text-stone-500 font-mono' }, `${currentHtml.length} chars`),
+      ),
+      h('div', { className: 'bg-stone-50', style: { minHeight: '300px' } },
+        !currentHtml && !chatLoading && h('div', { className: 'h-[300px] flex items-center justify-center text-center px-4' },
+          h('div', null,
+            h('div', { className: 'text-4xl mb-2 opacity-20' }, '✨'),
+            h('p', { className: 'text-xs text-stone-500' }, 'Your section will appear here once you describe it'),
+          ),
+        ),
+        chatLoading && !currentHtml && h('div', { className: 'h-[300px] flex items-center justify-center' },
+          h('div', { className: 'text-stone-500 flex items-center gap-2 text-sm' },
+            h('span', { className: 'dot-pulse' }), h('span', { className: 'dot-pulse' }), h('span', { className: 'dot-pulse' }),
+            h('span', { className: 'ml-2' }, 'Generating...'),
+          ),
+        ),
+        currentHtml && h('iframe', {
+          srcDoc: fullDoc,
+          className: 'w-full bg-white',
+          style: { minHeight: '400px', height: '500px', border: 'none' },
+          title: 'Body section preview',
+          sandbox: 'allow-same-origin allow-popups',
+        }),
+      ),
+    );
+  }
+
+  function BodySectionCode({ currentHtml, allUploadedImages }) {
+    if (!currentHtml) return null;
+    const hasImages = allUploadedImages && allUploadedImages.length > 0;
+    return h('div', { className: 'bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden' },
+      h('div', { className: 'px-4 py-2.5 border-b border-stone-200 flex items-center justify-between' },
+        h('div', { className: 'flex items-center gap-2' },
+          h('span', { className: 'text-sm' }, '✂️'),
+          h('span', { className: 'text-xs font-semibold text-mirasee-ink' }, 'HTML Code'),
+          h('span', { className: 'text-[10px] text-stone-500' }, '— paste into Ontraport HTML element'),
+        ),
+        h(CopyButton, { text: currentHtml, label: 'Copy code' }),
+      ),
+      hasImages && h('div', { className: 'px-4 py-2 bg-amber-50 border-b border-amber-200 text-[11px] text-amber-900' },
+        h('strong', null, '⚠️ Image placeholders: '),
+        `The code contains ${allUploadedImages.length} placeholder${allUploadedImages.length > 1 ? 's' : ''} (`,
+        allUploadedImages.map((_, i) => `{{IMAGE_${i + 1}}}`).join(', '),
+        `). Before pasting into Ontraport, upload your images to Ontraport's media library and replace each placeholder with the real URL.`,
+      ),
+      h('pre', { className: 'code-block !rounded-none !max-h-[300px]' }, currentHtml),
+    );
   }
 
   function Footer() {
